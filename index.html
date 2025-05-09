@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grow a Garden Stock Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grow a Gardan Stock Tracker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -34,30 +35,40 @@
   </style>
 </head>
 <body>
-  <h1>Grow a Garden Stock Tracker</h1>  <div class="section" id="seedStock">
+  <h1>Grow a Gardan Stock Tracker</h1>
+
+  <div class="section" id="seedStock">
     <h2>Seed Shop</h2>
-    <div id="seedItems">Loading...</div>
-  </div>  <div class="section" id="gearStock">
+    <div id="seedItems"></div>
+  </div>
+
+  <div class="section" id="gearStock">
     <h2>Gear Shop</h2>
-    <div id="gearItems">Loading...</div>
-  </div>  <script>
-    async function fetchStock() {
-      try {
-        const response = await fetch('https://api.vulcanvalues.com/api/gag/stock');
-        const data = await response.json();
+    <div id="gearItems"></div>
+  </div>
 
-        const seedItems = document.getElementById('seedItems');
-        seedItems.innerHTML = data.seedStock.map(item => `<div class="stock-item ${item.rarity.toLowerCase()}">${item.name} (${item.rarity})</div>`).join('');
+  <script>
+    const sampleSeedStock = [
+      { name: "Sunflower Seed", rarity: "common" },
+      { name: "Blueberry Seed", rarity: "uncommon" },
+      { name: "Golden Rose Seed", rarity: "legendary" },
+    ];
 
-        const gearItems = document.getElementById('gearItems');
-        gearItems.innerHTML = data.gearStock.map(item => `<div class="stock-item ${item.rarity.toLowerCase()}">${item.name} (${item.rarity})</div>`).join('');
+    const sampleGearStock = [
+      { name: "Basic Watering Can", rarity: "common" },
+      { name: "Enchanted Shovel", rarity: "rare" },
+      { name: "Mythic Sprinkler", rarity: "mythical" },
+    ];
 
-      } catch (error) {
-        console.error('Error fetching stock:', error);
-      }
-    }
+    const seedItems = document.getElementById('seedItems');
+    seedItems.innerHTML = sampleSeedStock.map(item =>
+      `<div class="stock-item ${item.rarity}">${item.name} (${item.rarity})</div>`
+    ).join('');
 
-    fetchStock();
-    setInterval(fetchStock, 60000); // refresh every 1 minute
-  </script></body>
+    const gearItems = document.getElementById('gearItems');
+    gearItems.innerHTML = sampleGearStock.map(item =>
+      `<div class="stock-item ${item.rarity}">${item.name} (${item.rarity})</div>`
+    ).join('');
+  </script>
+</body>
 </html>
